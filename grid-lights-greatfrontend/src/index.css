@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.grid-box {
+  margin-top: 1rem;
+  width: 250px;
+  height: 250px;
+  /* background-color: beige; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+}
+
+.box:not(.inactive) {
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.box.filled {
+  background-color: green;
+}
