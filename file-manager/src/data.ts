@@ -1,4 +1,4 @@
-interface FileType {
+export interface FileType {
   id: string;
   name: string;
   isFolder: boolean;

@@ -24,3 +24,51 @@ aside {
   overflow: auto;
   padding: 1rem;
 }
+
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.folder {
+  width: 100%;
+  padding: 0.15rem 0.25rem 0.15rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.25s ease;
+  border-radius: 4px;
+}
+
+.folder:hover {
+  background-color: #ddd;
+}
+
+.folder-name {
+  flex: 1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.folder-create {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2px;
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+.folder:hover .folder-create {
+  opacity: 1;
+}
+
+.arrow {
+  height: 14px;
+}
