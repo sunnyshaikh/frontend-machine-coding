@@ -1,3 +1,3 @@
-File Manager/Exlorer
+# File Manager/Exlorer
 
 ![preview](./src/assets/image.png)
