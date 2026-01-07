@@ -13,4 +13,30 @@
 body {
   min-height: 100vh;
   background-color: #f1f2f3;
+  display: grid;
+  place-content: center;
+}
+
+.progress-bar {
+  position: relative;
+  width: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.progress-bar span {
+  z-index: 2;
+}
+
+.fill {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: green;
+  transition: 0.25s ease;
 }
