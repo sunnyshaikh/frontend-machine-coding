@@ -58,3 +58,9 @@ form {
 .popper-item:hover {
   background-color: #f6f6f6;
 }
+
+.popper .no-item {
+  padding: 0.25rem;
+  color: #707070;
+  font-style: italic;
+}

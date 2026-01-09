@@ -20,7 +20,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchRecipes();
+    const timer = setTimeout(() => fetchRecipes(), 300);
+    return () => clearTimeout(timer);
   }, [input]);
 
   return (
