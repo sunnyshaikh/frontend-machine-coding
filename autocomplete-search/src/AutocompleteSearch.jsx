@@ -26,13 +26,15 @@ const AutocompleteSearch = ({
         placeholder={placeholder}
         id={uid}
       />
-      <div className="popper">
-        {options.map((op) => (
-          <span key={op} className="popper-item">
-            {op}
-          </span>
-        ))}
-      </div>
+      {!!options.length && (
+        <div className="popper">
+          {options.map((op) => (
+            <span key={op} className="popper-item">
+              {op}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
