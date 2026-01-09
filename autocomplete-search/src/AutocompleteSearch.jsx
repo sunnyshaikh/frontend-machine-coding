@@ -9,12 +9,21 @@ const AutocompleteSearch = ({
   id,
   label,
   placeholder = "",
-  open,
+  open = false,
+  onOpen,
+  onClose,
 }) => {
-  const [isOpen, setIsOpen] = useState(open ?? false);
+  const [isOpen, setIsOpen] = useState(
+    typeof open === "boolean" ? open : false
+  );
   const wrapperRef = useRef(null);
 
   const uid = id ?? useId();
+
+  useEffect(() => {
+    if (isOpen && typeof onOpen === "function") onOpen();
+    else if (!isOpen && typeof onClose === "function") onClose();
+  }, [isOpen]);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -39,7 +48,11 @@ const AutocompleteSearch = ({
         className="form-control"
         value={value}
         onChange={onChange}
-        onFocus={() => setIsOpen(true)}
+        onFocus={(e) => {
+          setIsOpen(true);
+          onFocus?.(e);
+        }}
+        onBlur={onBlur}
         placeholder={placeholder}
         id={uid}
         role="combobox"
