@@ -1,5 +1,11 @@
+import PasswordGenerator from "./PasswordGenerator";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div className="app">
+      <PasswordGenerator />
+    </div>
+  );
 };
 
 export default App;

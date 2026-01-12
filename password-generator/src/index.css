@@ -2,6 +2,9 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  --primary: darkcyan;
+  --foreground: #f1f1f1;
 }
 
 * {
@@ -12,5 +15,100 @@
 
 body {
   min-height: 100dvh;
-  background-color: #f1f1f1;
+  background-color: var(--foreground);
+  display: grid;
+  place-items: center;
+  accent-color: var(--primary);
+}
+
+button {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: 0;
+}
+
+.app {
+  padding: 1rem;
+  width: 500px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.range,
+.checkbox-container,
+.result-box,
+.cta {
+  background-color: var(--foreground);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-box {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.result-box input {
+  flex: 1;
+}
+
+.range,
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.range div,
+.cta div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range div span,
+.cta div span {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.range input {
+  width: 100%;
+}
+
+.checkbox-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.checkbox-container div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cta button {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: 1rem;
 }
