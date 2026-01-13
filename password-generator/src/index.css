@@ -61,6 +61,11 @@ input[type="text"] {
   gap: 1rem;
 }
 
+.title {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
 .result-box {
   display: flex;
   gap: 0.5rem;
