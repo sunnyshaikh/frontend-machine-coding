@@ -68,6 +68,8 @@ input[type="text"] {
 
 .result-box input {
   flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 .range,

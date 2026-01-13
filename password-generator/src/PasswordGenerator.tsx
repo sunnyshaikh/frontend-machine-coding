@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 interface StateType {
   ucase: boolean;
@@ -9,10 +9,10 @@ interface StateType {
 }
 
 const initConfig: StateType = {
-  ucase: false,
-  lcase: false,
-  digits: false,
-  symbols: false,
+  ucase: true,
+  lcase: true,
+  digits: true,
+  symbols: true,
   length: 6,
 };
 
@@ -48,11 +48,47 @@ const reducer = (state: StateType, action: Action): StateType => {
   }
 };
 
+const getCharacters = (low: number, high: number): string => {
+  let str = "";
+  for (let i = low; i <= high; i++) {
+    str += String.fromCharCode(i);
+  }
+  return str;
+};
+
 const PasswordGenerator = () => {
   const [password, setPassword] = useState("");
   const [state, dispatch] = useReducer(reducer, initConfig);
 
-  console.table(state);
+  const generatePassword = () => {
+    if (!state.lcase && !state.ucase && !state.digits && !state.symbols) {
+      alert("Atleast one checkbox required");
+      return;
+    }
+
+    const lowercase = getCharacters(97, 122);
+    const uppercase = getCharacters(65, 90);
+    const digits = getCharacters(48, 57);
+    const symbols = "`~!@#$%^&*()[]{};':,.<>/?\"";
+
+    let finalChars = "";
+    if (state.ucase) finalChars += uppercase;
+    if (state.lcase) finalChars += lowercase;
+    if (state.digits) finalChars += digits;
+    if (state.symbols) finalChars += symbols;
+
+    let password = "";
+    for (let i = 0; i < state.length; i++) {
+      let index = Math.floor(Math.random() * finalChars.length + 1);
+      password += finalChars.charAt(index);
+    }
+
+    setPassword(password);
+  };
+
+  useEffect(() => {
+    generatePassword();
+  }, []);
 
   return (
     <div className="container">
@@ -129,7 +165,7 @@ const PasswordGenerator = () => {
           <span>Strength:</span>
           <span>Medium</span>
         </div>
-        <button>Generate Password</button>
+        <button onClick={() => generatePassword()}>Generate Password</button>
       </div>
     </div>
   );
