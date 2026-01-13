@@ -58,6 +58,8 @@ const getCharacters = (low: number, high: number): string => {
 
 const PasswordGenerator = () => {
   const [password, setPassword] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [strength, setStrength] = useState("");
   const [state, dispatch] = useReducer(reducer, initConfig);
 
   const generatePassword = () => {
@@ -66,24 +68,48 @@ const PasswordGenerator = () => {
       return;
     }
 
-    const lowercase = getCharacters(97, 122);
-    const uppercase = getCharacters(65, 90);
-    const digits = getCharacters(48, 57);
-    const symbols = "`~!@#$%^&*()[]{};':,.<>/?\"";
-
     let finalChars = "";
-    if (state.ucase) finalChars += uppercase;
-    if (state.lcase) finalChars += lowercase;
-    if (state.digits) finalChars += digits;
-    if (state.symbols) finalChars += symbols;
+
+    if (state.ucase) {
+      const uppercase = getCharacters(65, 90);
+      finalChars += uppercase;
+    }
+
+    if (state.lcase) {
+      const lowercase = getCharacters(97, 122);
+      finalChars += lowercase;
+    }
+
+    if (state.digits) {
+      const digits = getCharacters(48, 57);
+      finalChars += digits;
+    }
+
+    if (state.symbols) {
+      const symbols = "`~!@#$%^&*()[]{};':,.<>/?\"";
+      finalChars += symbols;
+    }
 
     let password = "";
     for (let i = 0; i < state.length; i++) {
-      let index = Math.floor(Math.random() * finalChars.length + 1);
+      let index = Math.floor(Math.random() * finalChars.length);
       password += finalChars.charAt(index);
     }
 
     setPassword(password);
+    setStrength(
+      state.length >= 12 ? "Strong" : state.length >= 8 ? "Medium" : "Weak"
+    );
+  };
+
+  const copyPassword = async () => {
+    try {
+      await navigator.clipboard.writeText(password);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error("Unable to copy password:", e);
+    }
   };
 
   useEffect(() => {
@@ -94,7 +120,9 @@ const PasswordGenerator = () => {
     <div className="container">
       <div className="result-box">
         <input type="text" value={password} readOnly />
-        <button>Copy</button>
+        <button onClick={() => copyPassword()} disabled={copied}>
+          {!copied ? "Copy" : "Copied :)"}
+        </button>
       </div>
 
       <div className="range">
@@ -108,7 +136,7 @@ const PasswordGenerator = () => {
           max={16}
           value={state.length}
           onChange={(e) =>
-            dispatch({ type: "length", payload: Number(e.target.value) })
+            dispatch({ type: cases.LENGTH, payload: Number(e.target.value) })
           }
         />
       </div>
@@ -120,7 +148,10 @@ const PasswordGenerator = () => {
             id="ucase"
             checked={state.ucase}
             onChange={(e) =>
-              dispatch({ type: "includeUppercase", payload: e.target.checked })
+              dispatch({
+                type: cases.INCLUDEUPPERCASE,
+                payload: e.target.checked,
+              })
             }
           />
           <label htmlFor="ucase">Include Uppercase</label>
@@ -131,7 +162,10 @@ const PasswordGenerator = () => {
             id="lcase"
             checked={state.lcase}
             onChange={(e) =>
-              dispatch({ type: "includeLowercase", payload: e.target.checked })
+              dispatch({
+                type: cases.INCLUDELOWERCASE,
+                payload: e.target.checked,
+              })
             }
           />
           <label htmlFor="lcase">Include Lowercase</label>
@@ -142,7 +176,7 @@ const PasswordGenerator = () => {
             id="digits"
             checked={state.digits}
             onChange={(e) =>
-              dispatch({ type: "includeDigits", payload: e.target.checked })
+              dispatch({ type: cases.INCLUDEDIGITS, payload: e.target.checked })
             }
           />
           <label htmlFor="digits">Include Digits</label>
@@ -153,7 +187,10 @@ const PasswordGenerator = () => {
             id="symbols"
             checked={state.symbols}
             onChange={(e) =>
-              dispatch({ type: "includeSymbols", payload: e.target.checked })
+              dispatch({
+                type: cases.INCLUDESYMBOLS,
+                payload: e.target.checked,
+              })
             }
           />
           <label htmlFor="symbols">Include Symbols</label>
@@ -163,7 +200,7 @@ const PasswordGenerator = () => {
       <div className="cta">
         <div>
           <span>Strength:</span>
-          <span>Medium</span>
+          <span>{strength}</span>
         </div>
         <button onClick={() => generatePassword()}>Generate Password</button>
       </div>
