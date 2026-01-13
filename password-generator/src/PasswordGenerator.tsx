@@ -114,11 +114,11 @@ const PasswordGenerator = () => {
 
   useEffect(() => {
     generatePassword();
-  }, []);
+  }, [state]);
 
   return (
     <div className="container">
-      <h1 className="title">Password Generator</h1>
+      <h1 className="title  ">Password Generator</h1>
       <div className="result-box">
         <input type="text" value={password} readOnly />
         <button onClick={() => copyPassword()} disabled={copied}>
