@@ -15,3 +15,33 @@ body {
   display: grid;
   place-items: center;
 }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 50px);
+  max-width: 600px;
+  gap: 0.25rem;
+  user-select: none;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.cell.selected {
+  background-color: #02aa02;
+}
