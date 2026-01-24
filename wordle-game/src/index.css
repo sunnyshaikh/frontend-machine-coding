@@ -12,3 +12,37 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+}
+
+.box {
+  height: 50px;
+  width: 50px;
+  border: 1px solid light-dark(#ccc, #8e8e8e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  user-select: none;
+}
