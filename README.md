@@ -30,3 +30,4 @@
 - find most repeated element
 - construct object from string path
 - find second highest element
+- implement **minBy()** function
