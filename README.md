@@ -31,3 +31,4 @@
 - construct object from string path
 - find second highest element
 - implement **minBy()** function
+- implement mergeData function
