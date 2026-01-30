@@ -66,7 +66,7 @@ const Row = ({ guess, isActive, currentGuess }) => {
   const displayWord = isActive ? currentGuess : guess;
 
   return (
-    <div className="row">
+    <div className={`row ${isActive ? "active" : ""}`}>
       {Array.from({ length: WORD_LENGTH }).map((_, i) => (
         <div key={i} className="box">
           {displayWord[i] ?? ""}

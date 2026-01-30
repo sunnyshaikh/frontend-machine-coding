@@ -32,8 +32,17 @@
 }
 
 .row {
+  position: relative;
   display: flex;
   gap: 5px;
+}
+
+.row.active::before {
+  position: absolute;
+  content: "👉";
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
 }
 
 .box {
