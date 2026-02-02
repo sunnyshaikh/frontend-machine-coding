@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const ROWS = 6;
 const WORD_LENGTH = 5;
 const WORD = "HELLO";
 
 const App = () => {
-  const [guesses, setGuesses] = useState(Array.from({ length: ROWS }).fill(""));
+  const [guesses, setGuesses] = useState<string[]>(
+    Array.from<string>({ length: ROWS }).fill(""),
+  );
   const [currentGuess, setCurrentGuess] = useState("");
   const [currentRow, setCurrentRow] = useState(0);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       // LETTERS
       if (/^[a-zA-Z]$/.test(e.key)) {
         setCurrentGuess((prev) =>
@@ -62,7 +64,13 @@ const App = () => {
   );
 };
 
-const Row = ({ guess, isActive, currentGuess }) => {
+interface RowType {
+  guess: string;
+  isActive: boolean;
+  currentGuess: string;
+}
+
+const Row: FC<RowType> = ({ guess, isActive, currentGuess }) => {
   const displayWord = isActive ? currentGuess : guess;
 
   return (
