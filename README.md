@@ -32,3 +32,5 @@
 - find second highest element
 - implement **minBy()** function
 - implement mergeData function
+- implement moveZeroesToEnd function
+- implement binarySearch function
