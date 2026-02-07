@@ -34,3 +34,4 @@
 - implement mergeData function
 - implement moveZeroesToEnd function
 - implement binarySearch function
+- find intersection of 2 arrays
