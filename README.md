@@ -35,3 +35,4 @@
 - implement moveZeroesToEnd function
 - implement binarySearch function
 - find intersection of 2 arrays
+- Problem: Valid Parentheses
