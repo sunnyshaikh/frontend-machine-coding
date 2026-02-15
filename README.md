@@ -12,6 +12,7 @@
 - Progress bar
 - Toast component
 - Wordle Game
+- useDebounce hook
 
 ##### Javascript
 
