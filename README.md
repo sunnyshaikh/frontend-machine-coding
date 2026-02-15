@@ -36,3 +36,4 @@
 - implement binarySearch function
 - find intersection of 2 arrays
 - Problem: Valid Parentheses
+- implement two sum function
