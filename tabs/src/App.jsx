@@ -1,5 +1,7 @@
+import Tabs from "./Tabs";
+
 const App = () => {
-  return <div>App</div>;
+  return <Tabs />;
 };
 
 export default App;
