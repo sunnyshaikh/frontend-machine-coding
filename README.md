@@ -13,6 +13,7 @@
 - Toast component
 - Wordle Game
 - useDebounce hook
+- star rating component
 
 ##### Javascript
 
