@@ -1,11 +1,11 @@
 import { MoreHorizontal, ArrowLeft, ArrowRight } from "lucide-react";
+import { useDraggable } from "@dnd-kit/react";
 import { cn } from "@/lib/utils";
 import { useBoardStore } from "@/store/taskStore";
 import type { Task, ColumnId } from "@/types";
 
 interface TaskCardProps {
   task: Task;
-  onDragStart: (e: React.DragEvent, taskId: string) => void;
 }
 
 const priorityConfig = {
@@ -22,8 +22,9 @@ const categoryConfig: Record<string, { bg: string; text: string }> = {
   Setup: { bg: "bg-violet-100", text: "text-violet-700" },
 };
 
-export function TaskCard({ task, onDragStart }: TaskCardProps) {
+export function TaskCard({ task }: TaskCardProps) {
   const { moveTaskLeft, moveTaskRight } = useBoardStore();
+  const { ref, isDragging } = useDraggable({ id: task.id });
   const priority = priorityConfig[task.priority];
   const category = categoryConfig[task.category] || { bg: "bg-gray-100", text: "text-gray-700" };
 
@@ -34,9 +35,13 @@ export function TaskCard({ task, onDragStart }: TaskCardProps) {
 
   return (
     <div
-      draggable
-      onDragStart={(e) => onDragStart(e, task.id)}
-      className="group bg-card rounded-xl border border-border p-4 cursor-grab active:cursor-grabbing hover:shadow-md transition-all"
+      ref={ref}
+      className={cn(
+        "group bg-card rounded-xl border border-border p-4 transition-all",
+        isDragging
+          ? "opacity-50 cursor-grabbing shadow-lg scale-[1.02]"
+          : "cursor-grab hover:shadow-md"
+      )}
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <h3 className="font-semibold text-foreground leading-snug">{task.title}</h3>

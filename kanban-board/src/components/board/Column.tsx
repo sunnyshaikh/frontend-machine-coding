@@ -1,4 +1,5 @@
 import { MoreHorizontal, Plus } from "lucide-react";
+import { useDroppable } from "@dnd-kit/react";
 import { cn } from "@/lib/utils";
 import { useBoardStore } from "@/store/taskStore";
 import { TaskCard } from "./TaskCard";
@@ -8,19 +9,19 @@ interface ColumnProps {
   column: ColumnType;
   tasks: Task[];
   onAddTask: (columnId: ColumnId) => void;
-  onDragStart: (e: React.DragEvent, taskId: string) => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent, columnId: ColumnId) => void;
 }
 
-export function Column({ column, tasks, onAddTask, onDragStart, onDragOver, onDrop }: ColumnProps) {
+export function Column({ column, tasks, onAddTask }: ColumnProps) {
   const taskCount = useBoardStore((state) => state.getFilteredTasks(column.id).length);
+  const { ref, isDropTarget } = useDroppable({ id: column.id });
 
   return (
     <div
-      onDragOver={onDragOver}
-      onDrop={(e) => onDrop(e, column.id)}
-      className="flex flex-col min-w-[320px] w-[320px] bg-muted/50 rounded-xl p-4"
+      ref={ref}
+      className={cn(
+        "flex flex-col min-w-[320px] w-[320px] rounded-xl p-4 transition-colors",
+        isDropTarget ? "bg-primary/10 ring-2 ring-primary/30" : "bg-muted/50"
+      )}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -37,7 +38,7 @@ export function Column({ column, tasks, onAddTask, onDragStart, onDragOver, onDr
 
       <div className="flex-1 space-y-3 overflow-y-auto">
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onDragStart={onDragStart} />
+          <TaskCard key={task.id} task={task} />
         ))}
       </div>
 
